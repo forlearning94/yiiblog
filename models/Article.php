@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "article".
@@ -73,6 +74,10 @@ class Article extends \yii\db\ActiveRecord
         return Yii::getAlias('@web') . '/uploads/' . $this->image;
     }
 
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDate($this->date);
+    }
   
 
     public function deleteImage()
@@ -121,6 +126,34 @@ class Article extends \yii\db\ActiveRecord
     public function clearCurrentTags()
     {
         ArticleTag::deleteAll(['article_id' => $this->id]);
+    }
+
+
+    public static function getAll($pageSize = 5)
+    {
+        $query = Article::find();
+        $count = $query->count();
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+
+        $articles = $query->offset($pagination->offset)
+            ->limit(2)
+            ->all();
+
+        $data['articles'] = $articles;
+        $data['pagination'] = $pagination;
+
+        return $data;
+    }
+
+    public static function getPopular()
+    {
+        return Article::find()->orderBy('viewed desc')->limit(3)->all();
+    }
+
+    public static function getRecent()
+    {
+        return Article::find()->orderBy('date')->limit(4)->all();
     }
 
 

@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <article class="post">
                     <div class="post-thumb">
-                        <a href="blog.html"><img src=<?= Yii::getAlias('@web/') . "public/images/blog-1.jpg"?> alt=""></a>
+                        <a href="blog.html"><img src=<?= $article->getImage(); ?> alt=""></a>
                     </div>
                     <div class="post-content">
                         <header class="entry-header text-center text-uppercase">
