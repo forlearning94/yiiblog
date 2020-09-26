@@ -20,22 +20,22 @@ class PublicAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        '/public/assets/css/font-awesome.min.css',
-        '/public/assets/css/bootstrap.min.css',
-        '/public/assets/css/animate.min.css',
-        '/public/assets/css/owl.carousel.css',
-        '/public/assets/css/owl.theme.css',
-        '/public/assets/css/owl.transitions.css',
-        '/public/assets/style.css',
-        '/public/assets/css/responsive.css'
+        "/public/css/font-awesome.min.css",
+        "/public/css/bootstrap.min.css",
+        "/public/css/animate.min.css",
+        "/public/css/owl.carousel.css",
+        "/public/css/owl.theme.css",
+        "/public/css/owl.transitions.css",
+        "/public/css/style.css",
+        "/public/css/responsive.css"
     ];
     public $js = [
-        '/public/assets/js/jquery-1.11.3.min.js',
-        '/public/assets/js/bootstrap.min.js',
-        '/public/assets/js/owl.carousel.min.js',
-        '/public/assets/js/jquery.stickit.min.js',
-        '/public/assets/js/menu.js',
-        '/public/assets/js/scripts.js',
+        "/public/js/jquery-1.11.3.min.js",
+        "/public/js/bootstrap.min.js",
+        "/public/js/owl.carousel.min.js",
+        "/public/js/jquery.stickit.min.js",
+        "/public/js/menu.js",
+        "/public/js/scripts.js",
     ];
     public $depends = [
         
