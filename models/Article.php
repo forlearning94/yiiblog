@@ -109,6 +109,11 @@ class Article extends \yii\db\ActiveRecord
         return ArrayHelper::getColumn($selectedTags, 'id');
     }
 
+    public static function getArticlesByCategory($id)
+    {
+        return Article::find()->where(['category_id' => $id]);
+    }
+
     public function saveTags($tag_ids)
     {
         if(is_array($tag_ids))
@@ -180,8 +185,6 @@ class Article extends \yii\db\ActiveRecord
             ->via('orderItems');
     }
     */
-
-
 
     public function saveCategory($c_id)
     {   

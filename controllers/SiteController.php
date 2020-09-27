@@ -66,6 +66,7 @@ class SiteController extends Controller
     {
 
         $data = Article::getAll(3);
+
         $popular = Article::getPopular();
         $recent = Article::getRecent();
         $categories = Category::getAll(); 
@@ -83,24 +84,36 @@ class SiteController extends Controller
     {
         $article = Article::findOne($id);
 
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAll(); 
+
 
         return $this->render('single', [
-            'article' => $article
+            'article' => $article,
+            'popular' => $popular,
+            'recent' => $recent,
+            'categories' => $categories
         ]);
     }
 
-    public function actionCategory()
+    public function actionCategory($id)
     {
-        $query = Category::find();
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 3]);
-        $categories = $query->offset($pagination->offset)
-            ->limit(3)
-            ->all();
+       
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAll(); 
+
+        $data = Category::getArticlesByCategory($id);
+
+        
 
         return $this->render('category', [
-            'categories' => $categories,
-            'pagination' => $pagination
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
+            'popular' => $popular,
+            'recent' => $recent,
+            'categories' => $categories
         ]);
     }
 
