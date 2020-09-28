@@ -1,16 +1,17 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+    /* @var $this \yii\web\View */
+    /* @var $content string */
 
-use app\widgets\Alert;
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets\PublicAsset;
+    use app\widgets\Alert;
+    use yii\helpers\Html;
+    use yii\helpers\Url;
+    use yii\bootstrap\Nav;
+    use yii\bootstrap\NavBar;
+    use yii\widgets\Breadcrumbs;
+    use app\assets\PublicAsset;
 
-PublicAsset::register($this);
+    PublicAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -52,10 +53,10 @@ PublicAsset::register($this);
                 <div class="i_con">
                     <ul class="nav navbar-nav text-uppercase">                        
                         <?php if(Yii::$app->user->isGuest): ?>
-                            <li><a href="auth/login">Login</a></li>
-                            <li><a href="auth/signin">Register</a></li>
+                            <li><a href="<?= Url::toRoute(['auth/login']) ?>">Login</a></li>
+                            <li><a href="<?= Url::toRoute(['auth/signin']) ?>">Register</a></li>
                         <?php else: ?>
-                            <?= Html::beginForm(['auth/logout'], 'post')
+                            <?= Html::beginForm(['/auth/logout'], 'post')
                                 . Html::submitButton(
                                     'Logout (' . Yii::$app->user->identity->name . ')',
                                     ['class' => 'btn btn-link logout', 'style' => "padding:20px 0 0 20px;"]
@@ -66,7 +67,6 @@ PublicAsset::register($this);
                 </div>
             </div>
             <!-- /.navbar-collapse -->
-
 
             <div class="show-search">
                 <form role="search" method="get" id="searchform" action="#">
