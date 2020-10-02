@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\Article;
 use app\models\Category;
 use app\models\LoginForm;
+use app\models\SignupForm;
 use app\models\ContactForm;
 use yii\data\Pagination;
 
@@ -32,8 +33,27 @@ class AuthController extends Controller
         }
 
         $model->password = '';
-        return $this->render('/site/login', [
+        return $this->render('login', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if ($model->signup()) 
+            {
+                return $this->redirect(['auth/login']);
+            }
+
+        }
+        
+        return $this->render('signup', [
+            'model' => $model
         ]);
     }
 
