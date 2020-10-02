@@ -161,31 +161,6 @@ class Article extends \yii\db\ActiveRecord
         return Article::find()->orderBy('date')->limit(4)->all();
     }
 
-
-
-    /*
-
-    public function getItems()
-    {
-        return $this->hasMany(Item::className(), ['id' => 'item_id'])
-            ->viaTable('order_item', ['order_id' => 'id']);
-    }
-
-
-
-
-    public function getOrderItems()
-    {
-        return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
-    }
-
-    public function getItems()
-    {
-        return $this->hasMany(Item::className(), ['id' => 'item_id'])
-            ->via('orderItems');
-    }
-    */
-
     public function saveCategory($c_id)
     {   
         $category = Category::findOne($c_id);
