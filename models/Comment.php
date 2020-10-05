@@ -47,4 +47,15 @@ class Comment extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['article_id' => 'id']);
+    }
+
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDate($this->date);
+    }
+
 }

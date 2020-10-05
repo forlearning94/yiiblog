@@ -11,6 +11,7 @@ use app\models\Article;
 use app\models\Category;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\CommentForm;
 use yii\data\Pagination;
 
 class SiteController extends Controller
@@ -89,11 +90,17 @@ class SiteController extends Controller
         $categories = Category::getAll(); 
 
 
+        $comments = $article->comments;
+        $commentForm = new CommentForm();
+
+
         return $this->render('single', [
             'article' => $article,
             'popular' => $popular,
             'recent' => $recent,
-            'categories' => $categories
+            'categories' => $categories,
+            'comments' => $comments,
+            'commentForm' => $commentForm
         ]);
     }
 
