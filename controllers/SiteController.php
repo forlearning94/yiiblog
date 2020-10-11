@@ -90,8 +90,10 @@ class SiteController extends Controller
         $categories = Category::getAll(); 
 
 
-        $comments = $article->comments;
+        $comments = $article->getArticleComments();
         $commentForm = new CommentForm();
+
+        $article->viewedCounter();
 
 
         return $this->render('single', [
@@ -102,6 +104,21 @@ class SiteController extends Controller
             'comments' => $comments,
             'commentForm' => $commentForm
         ]);
+    }
+
+    public function actionComment($id)
+    {
+        $model = new CommentForm;
+
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
+                return $this->redirect(['site/view', 'id' => $id]);
+            }
+        }
     }
 
     public function actionCategory($id)
